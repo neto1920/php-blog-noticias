@@ -3,13 +3,13 @@
     print_r($_POST);
     echo '</pre>';
     
-    $titulo = $_POST['titulo'];
-    $categoria = $_POST['categoria'];
-    $descricao = $_POST['descricao'];
+    $titulo = str_replace('#', "-", $_POST['titulo']);
+    $categoria = str_replace('#', "-", $_POST['categoria']);
+    $descricao = str_replace('#', "-", $_POST['descricao']);
 
     $texto = $titulo . "#" . $categoria . "#" . $descricao . PHP_EOL;
 
-    $materias = fopen("materias.txt", "a");
+    $materias = fopen("materias.hd", "a");
     fwrite($materias, $texto);
     fclose($materias);
 

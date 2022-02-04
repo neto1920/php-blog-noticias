@@ -1,14 +1,15 @@
-<?php require_once('valida_acess.php') ?>
 <?php 
-  $materias = [];
-  $exibe_materias = fopen('materias.txt', 'r');
+  require_once('valida_acess.php');
+  $exibe_materias = [];
+  $materias = fopen('materias.hd', 'r');
 
-  while(!feof($exibe_materias)) {
-    $e = fgets($exibe_materias);
-    $materias[] = $e;
+  while(!feof($materias)) {
+    $e = fgets($materias);
+    $exibe_materias[] = $e;
   }
-  #fclose($e);
+  fclose($materias);
 ?>
+
 <!DOCTYPE html>
 <html lang="pt">
   <head>
@@ -60,47 +61,29 @@
     </nav>
 
     <section class="container-fluid">  
-      
-   
 
       <h2 style="margin-top: 30px;">Últimas Matérias</h2>
       <hr>
-
-      <div class="row">
-        <div class="card col-6" style="max-width: 18rem;">
-          <div class="card-header">Header</div>
-          <div class="card-body">
-            <h5 class="card-title">Light card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
+      
+      <div class="row">           
+     
+      <div class="card border-success mb-3 " style="max-width: 30rem;">
+        <?php foreach ($materias as $materia){ ?>
+        <?php 
+        $e = explode('#', $materia);
+          if(count($e) < 3) {
+            continue;
+          }
+        ?>
+        <?php } ?>
+      
+        <div class="card-header bg-transparent border-success"><?php $e[0] ?>Header</div>
+        <div class="card-body text-success">
+          <h5 class="card-title"><?php $e[1] ?></h5>
+          <p class="card-text"><?php $e[2] ?> Descrição</p>
         </div>
-        <div class="card-consultar-chamado">
-          <div class="card col-6">
-            <?php foreach ($materias as $materia){ ?>
-              <?php 
-                $mostra_materias = explode('#', $materia);
-                if(count($mostra_materias) < 3) {
-                  continue;
-                }
-              ?>
-            <div class="card-header">
-              <h5><?php $mostra_materias[0] ?>TITULO</h5>
-            </div>
-              
-            <div class="card-body">
-              <div class="card mb-3 bg-light">
-                <div class="card-body">
-                  <h5 class="card-title"><?php $mostra_materias[1] ?>Categoria</h5>
-                  <p class="card-text"><?php $mostra_materias[2] ?> Descrição</p>
-                </div>
-              </div>
-
-              <?php } ?>
-            </div>
-          </div>
-        </div>
+        <div class="card-footer bg-transparent border-success">Footer</div>
       </div>
-
     </section>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
