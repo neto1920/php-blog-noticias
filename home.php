@@ -1,13 +1,14 @@
 <?php 
-  require_once('valida_acess.php');
-  $exibe_materias = [];
-  $materias = fopen('materias.hd', 'r');
+  require_once('valida_acess.php');  
 
-  while(!feof($materias)) {
-    $e = fgets($materias);
-    $exibe_materias[] = $e;
+  $materias = [];
+  $arquivo = fopen('arquivo.hd', 'r');
+
+  while(!feof($arquivo)) {
+    $registro = fgets($arquivo);
+    $materias[] = $registro;
   }
-  fclose($materias);
+  fclose($arquivo);
 ?>
 
 <!DOCTYPE html>
@@ -19,21 +20,14 @@
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
       <link rel="stylesheet" href="styles/index.css">      
       <title>Home</title>
-      <style>        
-          .bar {
-              background-color: #404079;
-              padding: 30px  0;
-              height: 40px;
-          }      
-          .nav-link {
-              margin-right: 20px;
-              font-weight: bold;
-          }
-
+      <style>
+        .nav-link {
+            font-weight: bold;
+        }
       </style>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary font-weight-bold">
       <div class="container-fluid ">
         <a class="navbar-brand text-light" href="#">Blog de Notícias</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +39,7 @@
               <a class="nav-link text-light active" aria-current="page" href="#">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-light" href="criar_materia.php">Escrever uma Matéria</a>
+              <a href="criar_materia.php" class="nav-link text-light">Escrever uma Matéria</a>
             </li>  
             <li class="nav-item sair">
               <a href="logoff.php" class="nav-link text-warning">Sair da Conta</a>
@@ -64,26 +58,25 @@
 
       <h2 style="margin-top: 30px;">Últimas Matérias</h2>
       <hr>
-      
-      <div class="row">           
-     
-      <div class="card border-success mb-3 " style="max-width: 30rem;">
-        <?php foreach ($materias as $materia){ ?>
-        <?php 
-        $e = explode('#', $materia);
-          if(count($e) < 3) {
+      <?php foreach ($materias as $materia){ ?>              
+        <?php
+          $materia_dados = explode("#", $materia);
+          if(count($materia_dados) < 3 ) {
             continue;
-          }
+          }  
         ?>
-        <?php } ?>
-      
-        <div class="card-header bg-transparent border-success"><?php $e[0] ?>Header</div>
-        <div class="card-body text-success">
-          <h5 class="card-title"><?php $e[1] ?></h5>
-          <p class="card-text"><?php $e[2] ?> Descrição</p>
+      <div class="row card-noticias">         
+        <div class="card border-success" style="max-width: 30rem;">
+            <div class="card-header bg-transparent border-success"><h4><?= $materia_dados[0] ?></h4></div>
+            <div class="card-body text-success">  
+              <h5 class="card-title"><?= $materia_dados[1] ?></h5>
+              <p class="card-text"><?= $materia_dados[2] ?></p>
+            </div>            
+            <div class="card-footer bg-transparent border-success">Footer</div>
         </div>
-        <div class="card-footer bg-transparent border-success">Footer</div>
       </div>
+      <br>
+      <?php } ?>
     </section>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

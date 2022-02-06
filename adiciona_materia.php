@@ -7,10 +7,19 @@
     $categoria = str_replace('#', "-", $_POST['categoria']);
     $descricao = str_replace('#', "-", $_POST['descricao']);
 
+    if(empty(($titulo) && ($descricao))) {
+        echo '
+            <div class="text-danger">
+                Nescessário preencher os campos
+            </div>
+        ';
+    };
+
     $texto = $titulo . "#" . $categoria . "#" . $descricao . PHP_EOL;
 
-    $materias = fopen("materias.hd", "a");
-    fwrite($materias, $texto);
-    fclose($materias);
+    $arquivo = fopen("arquivo.hd", "a");
+    fwrite($arquivo, $texto);
+    fclose($arquivo);
 
+    header('Location: home.php');
 ?>

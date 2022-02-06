@@ -12,3 +12,7 @@ body {
 .form-group{
     padding: 5px 0;
 }
+        
+.nav-link {
+    font-weight: bold;
+}
