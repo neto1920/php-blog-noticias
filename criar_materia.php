@@ -47,7 +47,7 @@
     <div class="container-fluid">  
       <div class="row">
         <div class="justify-content-center">
-          <div class="card col-9 position-absolute top-50 start-50 translate-middle mt-1 bi bi-caret-down-fill">
+          <div class="card col-9  top-50 start-50 translate-middle mt-1 bi bi-caret-down-fill">
             <div class="card-header">
               Escreva Sua Matéria
             </div>
@@ -80,7 +80,7 @@
                       <div class="col-6">
                         <a class="btn btn-lg btn-warning btn-block" type="button" href="home.php">Cancelar</a>
                       </div>
-                      <div class=" col-6 d-grid justify-content-end">
+                      <div class="col-6 d-grid justify-content-end">
                         <button class="btn btn-lg btn-info btn-block " type="submit">Publicar Matéria</button>
                       </div>
                     </div>
